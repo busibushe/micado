@@ -32,13 +32,10 @@
             background-color: var(--micado-cream);
             color: var(--text-dark);
             line-height: 1.6;
-            /* [PERUBAHAN] Background Pattern diaktifkan, menggunakan path lokal */
+            /* Background Pattern halus */
             background-image: url('images/micado-pattern-bg.png'); 
             background-size: 400px; 
             background-repeat: repeat;
-            /* Jika gambar pattern Anda transparan, opacity ini tidak perlu.
-               Jika background putih solid, gunakan opacity untuk membuatnya samar. */
-            /* opacity: 0.98; */ 
         }
 
         /* --- Typography --- */
@@ -51,7 +48,7 @@
             font-weight: 800;
             font-size: 2.5rem;
             line-height: 1.2;
-            /* color: var(--micado-orange); */
+            color: var(--micado-blue);
             margin-bottom: 1rem;
         }
 
@@ -94,7 +91,7 @@
 
         /* --- Header --- */
         header {
-            padding: 1rem 0;
+            padding: 0.8rem 0;
             background-color: rgba(255, 249, 244, 0.95);
             backdrop-filter: blur(10px);
             position: sticky;
@@ -112,18 +109,13 @@
         .logo-placeholder {
             display: flex;
             align-items: center;
-            font-family: var(--font-heading);
-            font-weight: 800;
-            font-size: 1.5rem;
-            color: var(--micado-blue);
         }
         
         .logo-placeholder img {
             height: 35px;
-            margin-right: 10px;
         }
 
-        /* --- Buttons --- */
+        /* --- Buttons (Primary Orange) --- */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -147,10 +139,27 @@
             box-shadow: 0 8px 25px rgba(255, 138, 0, 0.4);
         }
 
-        .btn-small {
-            padding: 0.6rem 1.2rem;
+        /* --- [BARU] Button Outline (Untuk Header) --- */
+        /* Agar tidak terlalu dominan di header */
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            color: var(--micado-blue);
+            border: 2px solid var(--micado-blue);
+            text-decoration: none;
+            font-family: var(--font-heading);
+            font-weight: 700;
             font-size: 0.95rem;
-            box-shadow: 0 4px 10px rgba(255, 138, 0, 0.2);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--micado-blue);
+            color: white;
         }
 
         .wa-icon {
@@ -198,20 +207,21 @@
             color: var(--micado-orange);
         }
 
-        /* --- Pain Points Section (Situasi) --- */
+        /* --- Pain Points Section --- */
         #pain-points {
-            background-color: rgba(255, 255, 255, 0.9); /* Background putih semi-transparan agar pattern terlihat */
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 40px;
             margin: 2rem auto;
             width: 95%;
             max-width: 1100px;
+            padding: 3rem 2rem;
         }
 
         .pain-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
 
         .pain-card {
@@ -232,7 +242,7 @@
             display: block;
         }
 
-        /* --- Solution Section (MiCADO) --- */
+        /* --- Solution Section --- */
         #solution {
             text-align: center;
         }
@@ -261,7 +271,7 @@
             margin-top: 2px;
         }
 
-        /* --- Redesigned Promo Section --- */
+        /* --- Promo Section --- */
         #offer-container {
             padding: 2rem 0;
         }
@@ -353,10 +363,10 @@
             animation: pulse 2s ease-in-out infinite;
         }
 
-        /* --- Final CTA & Sticky Button --- */
+        /* --- Final CTA --- */
         #final-cta {
             text-align: center;
-            padding-bottom: 7rem;
+            padding-bottom: 8rem; /* Extra ruang untuk sticky button */
             background-color: #fff;
             border-radius: 40px 40px 0 0;
             margin-top: 2rem;
@@ -366,27 +376,26 @@
             color: var(--micado-blue);
         }
 
+        /* --- [BARU] Optimized Sticky CTA (Menempel di bawah) --- */
         .sticky-cta-container {
             position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 450px;
+            bottom: 0; /* Menempel penuh ke bawah */
+            left: 0;
+            width: 100%; /* Lebar penuh */
             z-index: 1000;
+            background: white; /* Background putih agar konten di belakangnya tidak tembus */
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1); /* Bayangan ke atas */
         }
 
         .btn-sticky {
             width: 100%;
-            padding: 1rem;
-            font-size: 1.1rem;
-            animation: pulse-shadow 2s infinite;
-        }
-
-        @keyframes pulse-shadow {
-            0% { box-shadow: 0 0 0 0 rgba(255, 138, 0, 0.6); }
-            70% { box-shadow: 0 0 0 12px rgba(255, 138, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 138, 0, 0); }
+            padding: 1rem; /* Padding sedikit dikurangi agar lebih ramping di HP */
+            font-size: 1.15rem;
+            border-radius: 25px 25px 0 0; /* Sudut bawah rata, sudut atas bulat */
+            /* Animasi pulse dihilangkan agar tidak terlalu mengganggu di mode full-width, 
+               tapi gradient tetap dipertahankan agar menonjol */
+            background: linear-gradient(to right, var(--micado-orange), var(--micado-orange-dark));
+            border: none;
         }
         
         @keyframes pulse {
@@ -398,7 +407,7 @@
         footer {
             background-color: var(--micado-blue);
             color: white;
-            padding: 4rem 0 6rem;
+            padding: 4rem 0 7rem; /* Extra padding bawah untuk sticky button */
             text-align: center;
             margin-top: -2rem;
         }
@@ -439,6 +448,7 @@
                 padding: 4rem;
             }
 
+            /* Di Desktop, sembunyikan sticky button bawah dan munculkan tombol di hero */
             .sticky-cta-container {
                 display: none;
             }
@@ -460,7 +470,7 @@
             <div class="logo-placeholder">
                 <img src="images/micado-logo-orange.png" alt="MiCADO Logo">
             </div>
-            <a href="https://wa.me/628131176351?text=Halo%20MiCADO,%20saya%20mau%20tanya-tanya%20dulu%20tentang%20program%20belajarnya." class="btn btn-small" target="_blank">
+            <a href="https://wa.me/628131176351?text=Halo%20MiCADO,%20saya%20mau%20tanya-tanya%20dulu%20tentang%20program%20belajarnya." class="btn-outline" target="_blank">
                 Hubungi Kami
             </a>
         </div>
