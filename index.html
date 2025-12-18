@@ -47,7 +47,7 @@
             font-weight: 800;
             font-size: 2.5rem;
             line-height: 1.2;
-            color: var(--micado-blue);
+            color: var(--micado-orange);
             margin-bottom: 1rem;
         }
 
@@ -110,7 +110,6 @@
             align-items: center;
         }
         
-        /* [UPDATE] Ukuran logo diperkecil sedikit */
         .logo-placeholder img {
             height: 28px; 
         }
@@ -139,26 +138,26 @@
             box-shadow: 0 8px 25px rgba(255, 138, 0, 0.4);
         }
 
-        /* --- [BARU] Header Icon Button --- */
-        .header-icon-btn {
-            display: flex;
+        /* --- Button Outline (Untuk Header) --- */
+        .btn-outline {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            padding: 0.5rem 1.2rem; /* Padding sedikit disesuaikan untuk teks */
+            background: transparent;
             color: var(--micado-blue);
+            border: 2px solid var(--micado-blue);
             text-decoration: none;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 50px;
             transition: all 0.3s ease;
-            padding: 5px;
-            border-radius: 50%;
         }
         
-        .header-icon-btn:hover {
-            background-color: rgba(11, 95, 255, 0.1); /* Warna biru transparan saat hover */
-            transform: scale(1.1);
-        }
-        
-        .header-icon-svg {
-            width: 32px; /* Ukuran ikon cukup besar untuk di-tap */
-            height: 32px;
+        .btn-outline:hover {
+            background-color: var(--micado-blue);
+            color: white;
         }
 
         .wa-icon {
@@ -284,10 +283,9 @@
             box-shadow: 0 15px 40px rgba(255, 138, 0, 0.3);
             position: relative;
             overflow: hidden;
-            z-index: 1; /* Memastikan konten di atas pattern */
+            z-index: 1;
         }
 
-        /* Hiasan background melayang (Emoji) */
         .promo-box::before {
             content: '🎉';
             position: absolute;
@@ -300,7 +298,6 @@
             z-index: -1;
         }
 
-        /* [UPDATE] Tambahan Texture Pattern Halus di Background Oranye */
         .promo-box::after {
             content: '';
             position: absolute;
@@ -308,10 +305,10 @@
             background-image: url('images/micado-pattern-bg.png');
             background-size: 300px;
             background-repeat: repeat;
-            opacity: 0.05; /* Sangat halus */
+            opacity: 0.05;
             pointer-events: none;
-            z-index: -2; /* Di belakang emoji dan konten */
-            filter: invert(1); /* Membalik warna pattern jadi putih agar terlihat di bg oranye */
+            z-index: -2;
+            filter: invert(1);
         }
 
         @keyframes float {
@@ -392,22 +389,28 @@
             color: var(--micado-blue);
         }
 
-        /* --- [UPDATE] Optimized Sticky CTA (Sudut Bawah Rata) --- */
+        /* --- Sticky CTA (Dinamic) --- */
         .sticky-cta-container {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
-            background: transparent; /* Container transparan */
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            background: transparent;
+            /* Transisi halus untuk efek muncul/hilang */
+            transition: transform 0.4s ease-in-out;
+            transform: translateY(0); /* Posisi default (muncul) */
+        }
+
+        /* Class untuk menyembunyikan sticky button */
+        .sticky-cta-container.hidden {
+            transform: translateY(100%); /* Geser ke bawah keluar layar */
         }
 
         .btn-sticky {
             width: 100%;
             padding: 1rem;
             font-size: 1.15rem;
-            /* [PENTING] Sudut atas bulat, sudut bawah rata (0) */
             border-radius: 15px 15px 0 0; 
             background: linear-gradient(to right, var(--micado-orange), var(--micado-orange-dark));
             border: none;
@@ -432,18 +435,12 @@
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
         }
-        
-        /* Footer Logo Size */
-        .footer-logo-img {
-            height: 35px; /* Ukuran normal di footer */
-        }
 
         /* --- Responsive Design (Tablet & Desktop) --- */
         @media (min-width: 768px) {
             h1 { font-size: 3.5rem; }
             h2 { font-size: 2.5rem; }
             
-            /* Logo di desktop bisa sedikit lebih besar */
             .logo-placeholder img { height: 35px; }
 
             section { padding: 5rem 0; }
@@ -472,7 +469,7 @@
             }
 
             .sticky-cta-container {
-                display: none;
+                display: none !important; /* Pastikan selalu tersembunyi di desktop */
             }
             
             #final-cta {
@@ -492,11 +489,8 @@
             <div class="logo-placeholder">
                 <img src="images/micado-logo-orange.png" alt="MiCADO Logo">
             </div>
-            <a href="https://wa.me/628131176351?text=Halo%20MiCADO,%20saya%20mau%20tanya-tanya%20dulu%20tentang%20program%20belajarnya." class="header-icon-btn" target="_blank" aria-label="Hubungi Kami via WhatsApp">
-                <svg class="header-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.07c-1.48 0-2.93-.4-4.21-1.15l-.3-.18-3.13.82.83-3.04-.2-.31a8.124 8.124 0 01-1.25-4.29c0-4.5 3.66-8.16 8.16-8.16s8.16 3.66 8.16 8.16-3.66 8.15-8.06 8.15z"/>
-                    <path d="M17.29 14.84c-.23-.11-1.37-.68-1.58-.75-.21-.08-.37-.11-.53.11-.16.23-.61.75-.75.91-.14.16-.27.18-.51.07-.23-.11-.98-.36-1.87-1.15-.69-.62-1.16-1.38-1.29-1.62-.14-.23-.01-.36.1-.47.11-.1.23-.27.35-.4.11-.14.16-.23.23-.38.08-.16.04-.31-.02-.42-.07-.11-.53-1.28-.73-1.75-.19-.46-.39-.39-.53-.4l-.46-.01c-.16 0-.42.06-.64.3-.23.23-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.57.12.16 1.75 2.67 4.23 3.74.59.25 1.05.4 1.41.52.6.19 1.28.16 1.83.1.61-.07 1.37-.56 1.56-1.1.19-.53.19-1.01.14-1.1-.05-.08-.18-.14-.41-.25z"/>
-                </svg>
+            <a href="https://wa.me/628131176351?text=Halo%20MiCADO,%20saya%20mau%20tanya-tanya%20dulu%20tentang%20program%20belajarnya." class="btn-outline" target="_blank">
+                Hubungi Kami
             </a>
         </div>
     </header>
@@ -513,7 +507,7 @@
                 <p>Belajar jadi lebih fun dengan kurikulum <strong>Cambridge & Marshall Cavendish</strong>. Pendampingan personal, online maupun offline.</p>
                 
                 <div class="desktop-cta">
-                    <a href="https://wa.me/628131176351?text=Halo%20MiCADO,%20saya%20tertarik%20dengan%20metode%20belajarnya,%20mau%20konsultasi." class="btn" target="_blank">
+                    <a href="https://wa.me/628131176351?text=Halo%20MiCADO,%20saya%20tertarik%20dengan%20metode%20belajarnya,%20mau%20konsultasi." class="btn track-cta" target="_blank">
                         <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.07c-1.48 0-2.93-.4-4.21-1.15l-.3-.18-3.13.82.83-3.04-.2-.31a8.124 8.124 0 01-1.25-4.29c0-4.5 3.66-8.16 8.16-8.16s8.16 3.66 8.16 8.16-3.66 8.15-8.06 8.15z"/><path d="M17.29 14.84c-.23-.11-1.37-.68-1.58-.75-.21-.08-.37-.11-.53.11-.16.23-.61.75-.75.91-.14.16-.27.18-.51.07-.23-.11-.98-.36-1.87-1.15-.69-.62-1.16-1.38-1.29-1.62-.14-.23-.01-.36.1-.47.11-.1.23-.27.35-.4.11-.14.16-.23.23-.38.08-.16.04-.31-.02-.42-.07-.11-.53-1.28-.73-1.75-.19-.46-.39-.39-.53-.4l-.46-.01c-.16 0-.42.06-.64.3-.23.23-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.57.12.16 1.75 2.67 4.23 3.74.59.25 1.05.4 1.41.52.6.19 1.28.16 1.83.1.61-.07 1.37-.56 1.56-1.1.19-.53.19-1.01.14-1.1-.05-.08-.18-.14-.41-.25z"/></svg>
                         Tanya Program via WhatsApp
                     </a>
@@ -575,7 +569,7 @@
             </ul>
             
             <div style="margin-top: 2rem;">
-                <a href="https://wa.me/628131176351?text=Halo%20MiCADO,%20saya%20mau%20tahu%20lebih%20detail%20tentang%20kurikulum%20dan%20tutornya." class="btn" target="_blank">
+                <a href="https://wa.me/628131176351?text=Halo%20MiCADO,%20saya%20mau%20tahu%20lebih%20detail%20tentang%20kurikulum%20dan%20tutornya." class="btn track-cta" target="_blank">
                     Mau Kenalan sama Tutor MiCADO
                 </a>
             </div>
@@ -592,7 +586,7 @@
                 <div class="promo-price">GRATIS</div>
                 <p style="font-size: 1.3rem; margin-bottom: 2rem; font-weight: 700; color: #fff;">+ Diskon 30% Paket Bulan Pertama!</p>
                 
-                <a href="https://wa.me/628131176351?text=Halo%20MiCADO,%20saya%20mau%20klaim%20Promo%20Spesial%20Bulan%20Ini%20dong!" class="btn btn-promo" target="_blank">
+                <a href="https://wa.me/628131176351?text=Halo%20MiCADO,%20saya%20mau%20klaim%20Promo%20Spesial%20Bulan%20Ini%20dong!" class="btn btn-promo track-cta" target="_blank">
                     <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="color: var(--micado-orange);"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.07c-1.48 0-2.93-.4-4.21-1.15l-.3-.18-3.13.82.83-3.04-.2-.31a8.124 8.124 0 01-1.25-4.29c0-4.5 3.66-8.16 8.16-8.16s8.16 3.66 8.16 8.16-3.66 8.15-8.06 8.15z"/><path d="M17.29 14.84c-.23-.11-1.37-.68-1.58-.75-.21-.08-.37-.11-.53.11-.16.23-.61.75-.75.91-.14.16-.27.18-.51.07-.23-.11-.98-.36-1.87-1.15-.69-.62-1.16-1.38-1.29-1.62-.14-.23-.01-.36.1-.47.11-.1.23-.27.35-.4.11-.14.16-.23.23-.38.08-.16.04-.31-.02-.42-.07-.11-.53-1.28-.73-1.75-.19-.46-.39-.39-.53-.4l-.46-.01c-.16 0-.42.06-.64.3-.23.23-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.57.12.16 1.75 2.67 4.23 3.74.59.25 1.05.4 1.41.52.6.19 1.28.16 1.83.1.61-.07 1.37-.56 1.56-1.1.19-.53.19-1.01.14-1.1-.05-.08-.18-.14-.41-.25z"/></svg>
                     Ambil Promonya Sekarang
                 </a>
@@ -606,14 +600,14 @@
             <h2>Siap Memulai Perjalanan Belajar yang Menyenangkan?</h2>
             <p class="section-subtitle">Konsultasikan kebutuhan belajar anak dengan tim kami. Gratis konsultasi dan assessment awal!</p>
             
-            <a href="https://wa.me/628131176351?text=Halo%20MiCADO,%20saya%20siap%20memulai%20perjalanan%20belajar%20anak.%20Mau%20konsultasi%20gratis." class="btn" target="_blank">
+            <a href="https://wa.me/628131176351?text=Halo%20MiCADO,%20saya%20siap%20memulai%20perjalanan%20belajar%20anak.%20Mau%20konsultasi%20gratis." class="btn track-cta" target="_blank">
                 Mulai Konsultasi Gratis
             </a>
             <p style="font-size: 0.9rem; margin-top: 1.5rem;">Respon cepat di jam kerja (09.00 - 17.00 WIB)</p>
         </div>
     </section>
 
-    <div class="sticky-cta-container">
+    <div class="sticky-cta-container" id="stickyCta">
         <a href="https://wa.me/628131176351?text=Halo%20MiCADO,%20saya%20lihat%20website%20dan%20mau%20klaim%20promo%20+%20konsultasi." class="btn btn-sticky" target="_blank">
             <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.07c-1.48 0-2.93-.4-4.21-1.15l-.3-.18-3.13.82.83-3.04-.2-.31a8.124 8.124 0 01-1.25-4.29c0-4.5 3.66-8.16 8.16-8.16s8.16 3.66 8.16 8.16-3.66 8.15-8.06 8.15z"/><path d="M17.29 14.84c-.23-.11-1.37-.68-1.58-.75-.21-.08-.37-.11-.53.11-.16.23-.61.75-.75.91-.14.16-.27.18-.51.07-.23-.11-.98-.36-1.87-1.15-.69-.62-1.16-1.38-1.29-1.62-.14-.23-.01-.36.1-.47.11-.1.23-.27.35-.4.11-.14.16-.23.23-.38.08-.16.04-.31-.02-.42-.07-.11-.53-1.28-.73-1.75-.19-.46-.39-.39-.53-.4l-.46-.01c-.16 0-.42.06-.64.3-.23.23-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.57.12.16 1.75 2.67 4.23 3.74.59.25 1.05.4 1.41.52.6.19 1.28.16 1.83.1.61-.07 1.37-.56 1.56-1.1.19-.53.19-1.01.14-1.1-.05-.08-.18-.14-.41-.25z"/></svg>
             Klaim Promo & Konsultasi via WA
@@ -623,12 +617,58 @@
     <footer>
         <div class="container">
             <div class="logo-placeholder" style="justify-content: center; color: white; margin-bottom: 1.5rem;">
-                <img src="images/micado-logo-orange.png" alt="MiCADO Logo" style="filter: brightness(0) invert(1);" class="footer-logo-img">
+                <img src="images/micado-logo-orange.png" alt="MiCADO Logo" style="filter: brightness(0) invert(1);">
             </div>
-            <p>Your Child's Learning Buddy</p>
+            <p style="font-weight: 700; font-size: 1.1rem;">Your Child's Learning Buddy</p>
             <p>© 2024 MiCADO. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Hanya jalankan script di mobile (layar < 768px)
+            if (window.innerWidth >= 768) return;
+
+            const stickyCta = document.getElementById('stickyCta');
+            // Pilih semua tombol CTA di dalam konten yang ingin dilacak
+            const trackedButtons = document.querySelectorAll('.track-cta');
+
+            // Opsi untuk Intersection Observer
+            const options = {
+                root: null, // Gunakan viewport sebagai root
+                threshold: 0.1 // Picu saat 10% tombol terlihat
+            };
+
+            // Callback fungsi yang dijalankan saat ada perubahan visibilitas
+            const observerCallback = (entries) => {
+                let isAnyButtonVisible = false;
+
+                entries.forEach(entry => {
+                    // Jika ada satu saja tombol yang terlihat (isIntersecting = true)
+                    if (entry.isIntersecting) {
+                        isAnyButtonVisible = true;
+                    }
+                });
+
+                // Logika Muncul/Hilang
+                if (isAnyButtonVisible) {
+                    // Ada tombol lain terlihat -> Sembunyikan Sticky CTA
+                    stickyCta.classList.add('hidden');
+                } else {
+                    // Tidak ada tombol lain terlihat -> Munculkan Sticky CTA
+                    stickyCta.classList.remove('hidden');
+                }
+            };
+
+            // Buat observer baru
+            const observer = new IntersectionObserver(observerCallback, options);
+
+            // Mulai mengamati (observe) setiap tombol yang dilacak
+            trackedButtons.forEach(button => {
+                observer.observe(button);
+            });
+        });
+    </script>
 
 </body>
 </html>
