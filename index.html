@@ -32,7 +32,6 @@
             background-color: var(--micado-cream);
             color: var(--text-dark);
             line-height: 1.6;
-            /* Background Pattern halus */
             background-image: url('images/micado-pattern-bg.png'); 
             background-size: 400px; 
             background-repeat: repeat;
@@ -111,8 +110,9 @@
             align-items: center;
         }
         
+        /* [UPDATE] Ukuran logo diperkecil sedikit */
         .logo-placeholder img {
-            height: 35px;
+            height: 28px; 
         }
 
         /* --- Buttons (Primary Orange) --- */
@@ -139,27 +139,26 @@
             box-shadow: 0 8px 25px rgba(255, 138, 0, 0.4);
         }
 
-        /* --- [BARU] Button Outline (Untuk Header) --- */
-        /* Agar tidak terlalu dominan di header */
-        .btn-outline {
-            display: inline-flex;
+        /* --- [BARU] Header Icon Button --- */
+        .header-icon-btn {
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0.5rem 1rem;
-            background: transparent;
             color: var(--micado-blue);
-            border: 2px solid var(--micado-blue);
             text-decoration: none;
-            font-family: var(--font-heading);
-            font-weight: 700;
-            font-size: 0.95rem;
-            border-radius: 50px;
             transition: all 0.3s ease;
+            padding: 5px;
+            border-radius: 50%;
         }
         
-        .btn-outline:hover {
-            background-color: var(--micado-blue);
-            color: white;
+        .header-icon-btn:hover {
+            background-color: rgba(11, 95, 255, 0.1); /* Warna biru transparan saat hover */
+            transform: scale(1.1);
+        }
+        
+        .header-icon-svg {
+            width: 32px; /* Ukuran ikon cukup besar untuk di-tap */
+            height: 32px;
         }
 
         .wa-icon {
@@ -168,7 +167,7 @@
             height: 24px;
         }
 
-        /* --- Hero Section dengan Animasi Blob --- */
+        /* --- Hero Section --- */
         #hero {
             text-align: center;
             padding-top: 3rem;
@@ -285,8 +284,10 @@
             box-shadow: 0 15px 40px rgba(255, 138, 0, 0.3);
             position: relative;
             overflow: hidden;
+            z-index: 1; /* Memastikan konten di atas pattern */
         }
 
+        /* Hiasan background melayang (Emoji) */
         .promo-box::before {
             content: '🎉';
             position: absolute;
@@ -296,6 +297,21 @@
             right: -40px;
             animation: float 6s ease-in-out infinite;
             pointer-events: none;
+            z-index: -1;
+        }
+
+        /* [UPDATE] Tambahan Texture Pattern Halus di Background Oranye */
+        .promo-box::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('images/micado-pattern-bg.png');
+            background-size: 300px;
+            background-repeat: repeat;
+            opacity: 0.05; /* Sangat halus */
+            pointer-events: none;
+            z-index: -2; /* Di belakang emoji dan konten */
+            filter: invert(1); /* Membalik warna pattern jadi putih agar terlihat di bg oranye */
         }
 
         @keyframes float {
@@ -366,7 +382,7 @@
         /* --- Final CTA --- */
         #final-cta {
             text-align: center;
-            padding-bottom: 8rem; /* Extra ruang untuk sticky button */
+            padding-bottom: 8rem;
             background-color: #fff;
             border-radius: 40px 40px 0 0;
             margin-top: 2rem;
@@ -376,24 +392,23 @@
             color: var(--micado-blue);
         }
 
-        /* --- [BARU] Optimized Sticky CTA (Menempel di bawah) --- */
+        /* --- [UPDATE] Optimized Sticky CTA (Sudut Bawah Rata) --- */
         .sticky-cta-container {
             position: fixed;
-            bottom: 0; /* Menempel penuh ke bawah */
+            bottom: 0;
             left: 0;
-            width: 100%; /* Lebar penuh */
+            width: 100%;
             z-index: 1000;
-            background: white; /* Background putih agar konten di belakangnya tidak tembus */
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1); /* Bayangan ke atas */
+            background: transparent; /* Container transparan */
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
         }
 
         .btn-sticky {
             width: 100%;
-            padding: 1rem; /* Padding sedikit dikurangi agar lebih ramping di HP */
+            padding: 1rem;
             font-size: 1.15rem;
-            border-radius: 25px 25px 0 0; /* Sudut bawah rata, sudut atas bulat */
-            /* Animasi pulse dihilangkan agar tidak terlalu mengganggu di mode full-width, 
-               tapi gradient tetap dipertahankan agar menonjol */
+            /* [PENTING] Sudut atas bulat, sudut bawah rata (0) */
+            border-radius: 15px 15px 0 0; 
             background: linear-gradient(to right, var(--micado-orange), var(--micado-orange-dark));
             border: none;
         }
@@ -407,7 +422,7 @@
         footer {
             background-color: var(--micado-blue);
             color: white;
-            padding: 4rem 0 7rem; /* Extra padding bawah untuk sticky button */
+            padding: 4rem 0 7rem;
             text-align: center;
             margin-top: -2rem;
         }
@@ -417,12 +432,20 @@
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
         }
+        
+        /* Footer Logo Size */
+        .footer-logo-img {
+            height: 35px; /* Ukuran normal di footer */
+        }
 
         /* --- Responsive Design (Tablet & Desktop) --- */
         @media (min-width: 768px) {
             h1 { font-size: 3.5rem; }
             h2 { font-size: 2.5rem; }
             
+            /* Logo di desktop bisa sedikit lebih besar */
+            .logo-placeholder img { height: 35px; }
+
             section { padding: 5rem 0; }
 
             #hero .container {
@@ -448,7 +471,6 @@
                 padding: 4rem;
             }
 
-            /* Di Desktop, sembunyikan sticky button bawah dan munculkan tombol di hero */
             .sticky-cta-container {
                 display: none;
             }
@@ -470,8 +492,11 @@
             <div class="logo-placeholder">
                 <img src="images/micado-logo-orange.png" alt="MiCADO Logo">
             </div>
-            <a href="https://wa.me/628131176351?text=Halo%20MiCADO,%20saya%20mau%20tanya-tanya%20dulu%20tentang%20program%20belajarnya." class="btn-outline" target="_blank">
-                Hubungi Kami
+            <a href="https://wa.me/628131176351?text=Halo%20MiCADO,%20saya%20mau%20tanya-tanya%20dulu%20tentang%20program%20belajarnya." class="header-icon-btn" target="_blank" aria-label="Hubungi Kami via WhatsApp">
+                <svg class="header-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.07c-1.48 0-2.93-.4-4.21-1.15l-.3-.18-3.13.82.83-3.04-.2-.31a8.124 8.124 0 01-1.25-4.29c0-4.5 3.66-8.16 8.16-8.16s8.16 3.66 8.16 8.16-3.66 8.15-8.06 8.15z"/>
+                    <path d="M17.29 14.84c-.23-.11-1.37-.68-1.58-.75-.21-.08-.37-.11-.53.11-.16.23-.61.75-.75.91-.14.16-.27.18-.51.07-.23-.11-.98-.36-1.87-1.15-.69-.62-1.16-1.38-1.29-1.62-.14-.23-.01-.36.1-.47.11-.1.23-.27.35-.4.11-.14.16-.23.23-.38.08-.16.04-.31-.02-.42-.07-.11-.53-1.28-.73-1.75-.19-.46-.39-.39-.53-.4l-.46-.01c-.16 0-.42.06-.64.3-.23.23-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.57.12.16 1.75 2.67 4.23 3.74.59.25 1.05.4 1.41.52.6.19 1.28.16 1.83.1.61-.07 1.37-.56 1.56-1.1.19-.53.19-1.01.14-1.1-.05-.08-.18-.14-.41-.25z"/>
+                </svg>
             </a>
         </div>
     </header>
@@ -598,7 +623,7 @@
     <footer>
         <div class="container">
             <div class="logo-placeholder" style="justify-content: center; color: white; margin-bottom: 1.5rem;">
-                <img src="images/micado-logo-orange.png" alt="MiCADO Logo" style="filter: brightness(0) invert(1);">
+                <img src="images/micado-logo-orange.png" alt="MiCADO Logo" style="filter: brightness(0) invert(1);" class="footer-logo-img">
             </div>
             <p>Your Child's Learning Buddy</p>
             <p>© 2024 MiCADO. All rights reserved.</p>
